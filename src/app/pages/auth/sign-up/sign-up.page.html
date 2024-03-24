@@ -1,0 +1,61 @@
+<app-header backButton="/auth" title=Registro> </app-header>
+<ion-content [fullscreen]="true">
+
+    <div class="d-flex-center">
+        <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+            <app-logo></app-logo>
+
+            <!-- Name --><!-- Name --><!-- Name --><!-- Name --><!-- Name --><!-- Name -->
+
+            <app-custom-input autocomplete="name" icon="person-outline" [control]="form.controls.name" type="text"
+                label="Nombre">
+            </app-custom-input>
+
+            <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
+
+                <div *ngIf="form.controls.name.errors?.['required']">
+                    <ion-label color="danger">Este campo es requerido</ion-label>
+                </div>
+                <div *ngIf="form.controls.name.errors?.['minlenght']">
+                    <ion-label color="danger">El nombre debe tener almenos 4 caracteres</ion-label>
+                </div>
+            </div>
+
+            <!-- Email --><!-- Email --><!-- Email --><!-- Email --><!-- Email --><!-- Email --><!-- Email -->
+
+            <app-custom-input autocomplete="email" icon="mail-outline" [control]="form.controls.email" type="email"
+                label="Correo">
+            </app-custom-input>
+
+            <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+
+                <div *ngIf="form.controls.email.errors?.['required']">
+                    <ion-label color="danger">El correo es requerido</ion-label>
+                </div>
+                <div *ngIf="form.controls.email.errors?.['email']">
+                    <ion-label color="danger">Ingrese un correo valido</ion-label>
+                </div>
+            </div>
+
+            <!-- Password --><!-- Password --><!-- Password --><!-- Password --><!-- Password --><!-- Password -->
+
+            <app-custom-input [control]="form.controls.password" icon="lock-closed-outline" type="password"
+                label="contraseña"></app-custom-input>
+
+            <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+                <div *ngIf="form.controls.password.errors?.['required']">
+                    <ion-label color="danger">La contraseña es requerida</ion-label>
+                </div>
+            </div>
+            <div>
+
+                <ion-button expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid">
+                       Registrate
+                    <ion-icon slot="end" name="person-add-outline"></ion-icon>
+                </ion-button>
+            </div>
+        </form>
+    </div>
+
+</ion-content>

@@ -1,0 +1,46 @@
+<app-header title="Carrito"></app-header>
+
+<ion-content>
+  <ion-list *ngIf="!loading">
+    <ion-item-sliding class="product-item" *ngFor="let item of cartProducts">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="item.product.image" />
+        </ion-avatar>
+        <ion-label>
+          <div class="name">{{item.product.name}}</div>
+          <div class="data">
+            <strong>Precio:</strong> {{item.product.price | currency: 'COP'}} <br>
+            <strong>Cantidad:</strong> {{item.quantity}} <br>
+            <strong>Unidades Vendidas</strong> {{item.product.soldUnits}}
+          </div>
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-label>Ganancia: {{item.product.price * item.product.soldUnits * item.quantity | currency:
+              'COP'}}</ion-label>
+          </ion-chip>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="removeFromCart(item.product, item.quantity)" color="danger">
+          <ion-icon class="option-btn" name="remove-circle-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="confirmClearCart()">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <div *ngIf="!loading && !cartProducts.length" class="empty">
+    <ion-icon name="cart-outline"></ion-icon>
+    <h3>No hay productos en el carrito</h3>
+  </div>
+</ion-content>
